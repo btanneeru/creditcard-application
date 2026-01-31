@@ -1,14 +1,14 @@
-const Applications = require("../models/application");
+const Applicants = require("../models/applicants");
 
-exports.getAllApplications = (query, limit, page, sort) => {
+exports.getAllApplicants = (query, limit, page, sort) => {
   return new Promise((resolve, reject) => {
-    Applications.find(query)
+    Applicants.find(query)
       .sort(sort)
       .skip(limit * page - limit)
       .limit(limit)
       .exec()
       .then((docs) => {
-        Applications.countDocuments(query)
+        Applicants.countDocuments(query)
           .then((totalCount) => {
             resolve({ docs: docs, totalCount: totalCount });
           })
@@ -22,10 +22,10 @@ exports.getAllApplications = (query, limit, page, sort) => {
   });
 };
 
-exports.addApplication = (data) => {
+exports.addApplicant = (data) => {
   return new Promise((resolve, reject) => {
-    const application = new Applications({ ...data });
-    application
+    const applicant = new Applicants({ ...data });
+    applicant
       .save()
       .then((doc) => {
         resolve(doc);
@@ -36,10 +36,10 @@ exports.addApplication = (data) => {
   });
 };
 
-exports.getApplicationById = (id) => {
+exports.getApplicantById = (id) => {
   return new Promise((resolve, reject) => {
     let condition = { _id: id };
-    Applications.find(condition)
+    Applicants.find(condition)
       .select("-__v")
       .exec()
       .then((doc) => {
@@ -51,11 +51,10 @@ exports.getApplicationById = (id) => {
   });
 };
 
-
-exports.getApplicantByUserId = (id) => {
+exports.getApplicantByEmail = (email) => {
   return new Promise((resolve, reject) => {
-    let condition = { user: id };
-    Applications.find(condition)
+    let condition = { email: email };
+    Applicants.find(condition)
       .select("-__v")
       .exec()
       .then((doc) => {
@@ -67,23 +66,9 @@ exports.getApplicantByUserId = (id) => {
   });
 };
 
-exports.getApplicantByCondition = (condition) => {
+exports.updateApplicant = (id, data) => {
   return new Promise((resolve, reject) => {
-    Applications.find(condition)
-      .select("-__v")
-      .exec()
-      .then((doc) => {
-        resolve(doc[0]);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-exports.updateApplication = (id, data) => {
-  return new Promise((resolve, reject) => {
-    Applications.updateOne({ _id: id }, { $set: data }, { new: true })
+    Applicants.updateOne({ _id: id }, { $set: data }, { new: true })
       .exec()
       .then((doc) => {
         resolve(doc);
@@ -97,7 +82,7 @@ exports.updateApplication = (id, data) => {
 exports.deleteApplicationById = (id) => {
   return new Promise((resolve, reject) => {
     let condition = { _id: id };
-    Applications.deleteOne(condition)
+    Applicants.deleteOne(condition)
       .exec()
       .then((doc) => {
         resolve(doc);

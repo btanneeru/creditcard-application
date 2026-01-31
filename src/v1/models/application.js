@@ -3,23 +3,42 @@ const { applications } = require("../utils/collections");
 
 const applicationsSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true
     },
-    completed: {
+    status: {
+      type: String,
+      required: true,
+      default: "submitted",
+      enum: ["submitted", "in_review", "approved", "rejected"]
+    },
+    approvedAmount: {
+      type: Number,
+      required: true
+    },
+    creditLimit: {
+      type: Number,
+    },
+    manualAssessmentRequired: {
       type: Boolean,
       default: false
     },
-    created_on: {
+    appliedOn: {
       type: Date,
     },
-    modified_on: {
+    decisionAt: {
+      type: Date,
+    },
+    createdAt: {
+      type: Date,
+    },
+    updatedAt: {
       type: Date,
     },
   },
   {
-    timestamps: { createdAt: "created_on", updatedAt: "modified_on" },
+    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
   }
 );
 

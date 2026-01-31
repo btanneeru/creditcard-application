@@ -50,6 +50,8 @@ app.use("/api/user", require("./src/user/routes/auth"));
 
 // Routing endpoints for creditcard modules
 app.use("/api/v1/applications", require("./src/v1/routes/application"));
+app.use("/api/v1/applicants", require("./src/v1/routes/applicant"));
+app.use("/api/v1/paninfo", require("./src/v1/routes/paninfo"));
 
 // Endpoint for Checking application health
 app.use("/api/health-check", health.check);

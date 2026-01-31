@@ -31,7 +31,7 @@ router.get("/:applicationId", [
 router.put("/:applicationId", [
   requireAuth,
   trimRequest.all,
-  validateApplication,
+  // validateApplication,
   ApplicationsService.updateApplication
 ]);
 

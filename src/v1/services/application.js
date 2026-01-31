@@ -103,7 +103,7 @@ exports.updateApplication = (req, res) => {
             if (doc) {
             let updateOps = {};
             
-            ApplicationsORM.updateApplication(id, updateOps)
+            ApplicationsORM.updateApplication(id, req.body)
                 .then((doc) => {
                     res.status(CODE.EVERYTHING_IS_OK)
                     .json({ message: `Application updated successfully!` });

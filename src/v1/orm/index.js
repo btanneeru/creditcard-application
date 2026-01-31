@@ -1,5 +1,9 @@
 const ApplicationsORM = require("./application");
+const ApplicantORM = require("./applicant");
+const PanInfoORM = require("./paninfo");
 
 module.exports = {
-    ApplicationsORM
+    ApplicationsORM,
+    ApplicantORM,
+    PanInfoORM
 };
