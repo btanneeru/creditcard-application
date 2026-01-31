@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
-const { applications } = require("../utils/collections");
+const { applications, applicants } = require("../utils/collections");
 
 const applicationsSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: applicants.model,
+      autopopulate: { select: "fullName email dob pan mobile annualIncome address createdAt", maxDepth: 1 },
       required: true
     },
     status: {
@@ -41,5 +43,8 @@ const applicationsSchema = new mongoose.Schema(
     timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
   }
 );
+
+applicationsSchema.plugin(require("mongoose-autopopulate"));
+
 
 module.exports = mongoose.model(applications.model, applicationsSchema, applications.collection);
