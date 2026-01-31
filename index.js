@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const health = require("./src/v1/utils/health");
 const mongoSanitize = require("express-mongo-sanitize");
 const http = require("http");
+const swagger = require("./swagger");
+const swaggerUi = require("swagger-ui-express");
 
 const app = express();
 const server = http.createServer(app);
@@ -59,10 +61,13 @@ app.use("/api/health-check", health.check);
 // Root endpoint
 app.get("/", (req, res) => {
   res.send(
-    "Welcome To Credit Card Application API, Pls refer API Doc for Using this application: http://localhost:5000/api-docs/"
+    "Welcome To Credit Card Application API, Pls refer API Doc for Using this application: http://localhost:5000/"
   );
 });
 
+
+// Swagger set up
+app.use("/api-docs/user", swagger.user, swaggerUi.serve, swaggerUi.setup());
 
 const port = 5000;
 if (process.env.env !== "test") {
