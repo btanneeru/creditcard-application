@@ -1,0 +1,60 @@
+{
+  "name": "credit-card-application-api",
+  "version": "1.0.1",
+  "description": "Credit card Applcation",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env env=development nodemon index.js",
+    "start:stg": "cross-env env=staging nodemon index.js",
+    "test": "cross-env env=test jest --silent --coverage",
+    "coverage": "cross-env env=test jest --coverage && xdg-open coverage/lcov-report/index.html"
+  },
+  "keywords": [
+    "credit-card-application-api"
+  ],
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true,
+    "rootDir": "./src/v1/",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
+  "jestSonar": {
+    "reportPath": "./src/v1/coverage",
+    "reportFile": "test-reporter.xml",
+    "indent": 4
+  },
+  "author": "Balanarsimha Rao Tanneeru",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-validator": "^7.0.1",
+    "http": "^0.0.1-security",
+    "jest": "^30.2.0",
+    "jest-sonar-reporter": "^2.0.0",
+    "lodash": "^4.17.21",
+    "mongodb": "^6.2.0",
+    "mongoose": "^8.0.0",
+    "mongoose-paginate-v2": "^1.7.4",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.0.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "socket.io": "^4.7.5",
+    "supertest": "^7.2.2",
+    "swagger-ui-express": "^5.0.0",
+    "trim-request": "^1.0.6",
+    "validator": "^13.15.26",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
